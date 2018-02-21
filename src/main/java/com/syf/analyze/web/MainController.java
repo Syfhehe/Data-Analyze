@@ -11,11 +11,16 @@ import java.util.Map;
 public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Map<String, Object> model) {
+        return "index";
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String home(Map<String, Object> model) {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
-        return "home";
+        return "test";
     }
 
     @RequestMapping("/foo")

@@ -19,23 +19,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class DataAnalyzeUserDetailService implements UserDetailsService {
 
-  private static final Logger logger = LoggerFactory.getLogger(DataAnalyzeUserDetailService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DataAnalyzeUserDetailService.class);
 
-  @Autowired
-  private UserRepository userRepository;
-  
-  public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-    logger.debug("Load user by username: " + userName);
-    List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-    User user = userRepository.findByUserName(userName);
-    if (user == null) {
-      logger.error("User not found");
-      throw new UsernameNotFoundException("User not found");
+    @Autowired
+    private UserRepository userRepository;
+
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        logger.debug("Load user by username: " + userName);
+        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        User user = userRepository.findByUserName(userName);
+        if (user == null) {
+            logger.error("User not found");
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
+        return new UserWithSalt(user.getUserName(), user.getUserName(), user.getPassword(), authorities);
     }
-
-    authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
-    return new UserWithSalt(user.getUserName(), user.getUserName(), user.getPassword(),
-        authorities);
-  }
 
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Test</title>
+    <link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <h1 th:text="${title}">Title</h1>
+    <div th:text="${message}">Fake content</div>
+    <div id="created" th:text="${#dates.format(date)}">July 11, 2012 2:17:16 PM CDT</div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#batchImportModal">
+    开始演示模态框
+</button>
+<!-- Modal -->
+<div id="batchImportModal" class="modal fade" role="dialog"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">批量导入用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="passwordDiv">
+                    <label>选择用户数据文件</label>
+                    <input class="form-control" type="file" id="batchFile"></input>
+                </div>
+                <div class="progress progress-striped active" style="display: none">
+                    <div id="progressBar" class="progress-bar progress-bar-info"
+                         role="progressbar" aria-valuemin="0" aria-valuenow="0"
+                         aria-valuemax="100" style="width: 0%">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input id="batchUploadBtn" type="submit" name="submit" class="btn btn-success" value="上传"></input>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- jQuery -->
+<script th:src="@{jquery/jquery.min.js}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

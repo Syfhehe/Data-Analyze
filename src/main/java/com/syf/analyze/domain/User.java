@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User implements Serializable{
+public class User implements Serializable {
 
     private static final long serialVersionUID = 8831737280677584496L;
 
@@ -34,15 +34,16 @@ public class User implements Serializable{
     @Column(name = "active", nullable = false)
     private boolean active;
 
-    protected User() {}
+    protected User() {
+    }
 
     /**
      * Constructor.
      *
      * @param userName String
      * @param password String
-     * @param role Role
-     * @param active Boolean
+     * @param role     Role
+     * @param active   Boolean
      */
     public User(String userName, String password, Role role, boolean active) {
         super();
@@ -54,8 +55,7 @@ public class User implements Serializable{
 
     @Override
     public String toString() {
-        return String.format("User[id=%d, name='%s', password='%s', role='%s', active='%b']", id,
-                userName, password, role, active);
+        return String.format("User[id=%d, name='%s', password='%s', role='%s', active='%b']", id, userName, password, role, active);
     }
 
     public String getUserName() {

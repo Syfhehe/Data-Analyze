@@ -44,8 +44,7 @@ public class MainControllerTest {
     public void setUp() {
         User user = userRepository.findByUserName(userName);
         if (user == null) {
-            userRepository.save(
-                    new User(userName, "1e85641a45ac9c9304216a6edc109b41", Role.DEVELOPER, true));
+            userRepository.save(new User(userName, "1e85641a45ac9c9304216a6edc109b41", Role.DEVELOPER, true));
         }
     }
 
@@ -56,8 +55,7 @@ public class MainControllerTest {
 
     @Test
     public void accessProtectedRedirectsToLogin() throws Exception {
-        MvcResult mvcResult =
-                this.mockMvc.perform(get("/")).andExpect(status().is3xxRedirection()).andReturn();
+        MvcResult mvcResult = this.mockMvc.perform(get("/")).andExpect(status().is3xxRedirection()).andReturn();
         assertThat(mvcResult.getResponse().getRedirectedUrl()).endsWith("/login");
     }
 
@@ -68,8 +66,7 @@ public class MainControllerTest {
 
     @Test
     public void loginInvalidUser() throws Exception {
-        this.mockMvc.perform(formLogin().user("invalid").password("invalid"))
-                .andExpect(unauthenticated()).andExpect(status().is3xxRedirection());
+        this.mockMvc.perform(formLogin().user("invalid").password("invalid")).andExpect(unauthenticated()).andExpect(status().is3xxRedirection());
     }
 
 }
