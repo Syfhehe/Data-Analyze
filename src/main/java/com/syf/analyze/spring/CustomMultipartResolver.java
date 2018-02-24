@@ -1,5 +1,6 @@
-package com.syf.analyze.component;
+package com.syf.analyze.spring;
 
+import com.syf.analyze.listener.UploadProgressListener;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadBase;
@@ -17,6 +18,10 @@ public class CustomMultipartResolver extends CommonsMultipartResolver {
 
     @Autowired
     private UploadProgressListener uploadProgressListener;
+
+    public void setFileUploadProgressListener(UploadProgressListener progressListener) {
+        this.uploadProgressListener = progressListener;
+    }
 
     @Override
     protected MultipartParsingResult parseRequest(HttpServletRequest request) throws MultipartException {

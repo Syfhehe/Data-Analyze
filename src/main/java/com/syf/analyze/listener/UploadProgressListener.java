@@ -1,5 +1,6 @@
-package com.syf.analyze.component;
+package com.syf.analyze.listener;
 
+import com.syf.analyze.context.Progress;
 import org.apache.commons.fileupload.ProgressListener;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class UploadProgressListener implements ProgressListener {
 
     public void setSession(HttpSession session) {
         this.session = session;
-        ProgressEntity status = new ProgressEntity();
+        Progress status = new Progress();
         session.setAttribute("status", status);
     }
 
@@ -21,9 +22,9 @@ public class UploadProgressListener implements ProgressListener {
      */
     @Override
     public void update(long pBytesRead, long pContentLength, int pItems) {
-        ProgressEntity status = (ProgressEntity) session.getAttribute("status");
-        status.setpBytesRead(pBytesRead);
-        status.setpContentLength(pContentLength);
-        status.setpItems(pItems);
+        Progress status = (Progress) session.getAttribute("status");
+        status.setBytesRead(pBytesRead);
+        status.setContentLength(pContentLength);
+        status.setItems(pItems);
     }
 }

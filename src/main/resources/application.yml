@@ -16,7 +16,13 @@ spring:
     url: jdbc:mysql://localhost:3306/syf?useSSL=false
     username: root
     password: 123456
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+  mvc:
+    static-path-pattern: /**
 
+web:
+  upload-path: /Users/elaineeee/Documents/GitHub/fileupload
 
 server:
   port: 9091
