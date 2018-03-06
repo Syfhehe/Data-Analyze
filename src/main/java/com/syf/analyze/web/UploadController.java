@@ -5,6 +5,7 @@ import com.syf.analyze.context.ErrorCode;
 import com.syf.analyze.service.FileUploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,12 @@ public class UploadController {
     @Value("${web.upload-path}")
     private String uploadPath;
 
+    @Autowired
+    private FileUploadService fileUploadService;
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public String add(String name, @RequestParam(required = false) MultipartFile file, HttpServletRequest request)
+    public String addTestData(String name, @RequestParam(required = false) MultipartFile file, HttpServletRequest request)
             throws IOException {
 
         logger.info("-----上传文件:{}-----", name);
@@ -40,8 +44,11 @@ public class UploadController {
             if (!file.getOriginalFilename().contains("xls")) {
                 return BaseReturn.response(ErrorCode.UNSUPPORTED_TYPE, "不支持的数据表类型：" + file.getContentType());
             }
-            String data = FileUploadService.saveData(request, file, uploadPath);
-            return BaseReturn.response(ErrorCode.SUCCESS, data);
+            System.out.println(file.getOriginalFilename());
+            System.out.println(file.getName());
+            String fullPath = fileUploadService.saveData(request, file, uploadPath);
+            String result =fileUploadService.batchImport(fullPath, file.getOriginalFilename());
+            return BaseReturn.response(ErrorCode.SUCCESS, result);
         }
         return BaseReturn.response(ErrorCode.SUCCESS);
     }

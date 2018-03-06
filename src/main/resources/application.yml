@@ -22,7 +22,7 @@ spring:
     static-path-pattern: /**
 
 web:
-  upload-path: /Users/elaineeee/Documents/GitHub/fileupload
+  upload-path: /Users/elaineeee/Documents/GitHub/fileupload/
 
 server:
   port: 9091
