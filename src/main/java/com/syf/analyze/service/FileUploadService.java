@@ -131,7 +131,6 @@ public class FileUploadService {
                 Cell cell = row.getCell(c);
                 if (null != cell) {
                     if (c == 0) {
-                        //java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
                         date = cell.getDateCellValue();
                         if (StringUtils.isEmpty(date)) {
                             rowMessage += "时间不能为空；";
