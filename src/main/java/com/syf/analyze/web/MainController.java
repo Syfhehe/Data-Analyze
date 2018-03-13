@@ -22,6 +22,10 @@ public class MainController {
         model.put("date", new Date());
         return "test";
     }
+    @RequestMapping("/tables")
+    public String table(Map<String, Object> model) {
+        return "tables";
+    }
 
     @RequestMapping("/foo")
     public String foo() {
